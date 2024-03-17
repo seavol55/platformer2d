@@ -1,26 +1,27 @@
-// get inputs
-key_left = keyboard_check(vk_left);
-key_right = keyboard_check(vk_right);
+#region Player movement logic
 
+// get inputs
+gKeyLeft = keyboard_check(vk_left);
+gKeyRight = keyboard_check(vk_right);
+
+// Player's direction
 /*
  * Note: keyboard check will return 0 or 1. Also to move right you have to move +x, to move left you have to
  *       move -x, hence the order right = left
  */
-var playerDirection = key_right - key_left;
-var movement = horizontalSpeed * playerDirection;
+var playerDirection = gKeyRight - gKeyLeft;
+var movementHorizontal = gHorizontalSpeed * playerDirection;
 
-// Check for horizontal collision
-if (place_meeting(x + movement, y, oBlock))
-{
-	var one = sign(movement); // this could be +1, -1, 0
-	while(!place_meeting(x + one, y, oBlock))
-	{
-		x += one;
-	}
-	
-	// Since we have handled the movement internally, lets set movement = 0
-	movement = 0;
-}
+gVerticalSpeed += gVerticalAcceleration;
+var movementVertical = gVerticalSpeed;
 
-// Set x position for the sprite
-x += movement;
+
+// Calculate player's final movement based on collision detection
+// Set x,y position for the sprite
+x += CalculateHorizontalCollision(x, y, movementHorizontal, oBlock);
+y += CalculateVerticalCollision(x, y, movementVertical, oBlock);
+
+// Reset vertical speed if it is already colliding with the ground (to avoid buffer overflows)
+gVerticalSpeed = CalculateVerticalSpeed(x, y, gVerticalSpeed, oBlock);
+
+#endregion
