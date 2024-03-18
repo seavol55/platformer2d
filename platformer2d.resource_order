@@ -19,5 +19,7 @@
   "ResourceOrderSettings":[
     {"name":"oBlock","order":1,"path":"objects/oBlock/oBlock.yy",},
     {"name":"sBlock","order":1,"path":"sprites/sBlock/sBlock.yy",},
+    {"name":"sPlayerRun","order":2,"path":"sprites/sPlayerRun/sPlayerRun.yy",},
+    {"name":"sPlayerAir","order":3,"path":"sprites/sPlayerAir/sPlayerAir.yy",},
   ],
 }
