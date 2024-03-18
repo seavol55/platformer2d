@@ -4,11 +4,13 @@
 // Global object variables
 gHorizontalSpeed = 7;
 
+gVerticalJumpSpeed = -10;
 gVerticalAcceleration = 0.5;
 gVerticalSpeed = 0;
 
 gKeyLeft = 0;
 gKeyRight = 0;
+gKeyJump = 0;
 
 
 
@@ -65,24 +67,20 @@ function CalculateVerticalCollision(xPos, yPos, movement, collider)
 	return movementAmount;
 }
 
-#endregion
-
-#region Player Gravity related functions
 
 /// @function                           CalculateHorizontalCollision(
 /// @param {real}  xPos                 x position of sprite
 /// @param {real}  yPos                 y position of the sprite
-/// @param {real}  vSpeed               Current vertical speed before calculation
-/// @param {Asset.GMObject}  collider   collider to check if we're colliding or not
-/// @description                        Calculate Object speed depending if it is colliding with another object or not
-function CalculateVerticalSpeed(xPos, yPos, vSpeed, collider)
+/// @param {Asset.GMObject}  collider   GameObject that represents the collider to check
+/// @description                        Check if player is touching ground (collider = ground object)
+function IsInGround(xPos, yPos, collider)
 {
 	if (place_meeting(xPos, yPos + 1, collider))
 	{
-		return 0;
+		return true;
 	}
 	
-	return vSpeed;
+	return false;
 }
 
 #endregion
